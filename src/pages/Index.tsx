@@ -1,11 +1,10 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Github, Linkedin, Mail, Phone, Download, ExternalLink, ChevronDown, Menu, X } from "lucide-react";
+import { Github, Linkedin, Mail, Phone, Download, ExternalLink, ChevronDown, Menu, X, Sparkles, Code, Rocket } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const Index = () => {
@@ -131,44 +130,119 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Enhanced Hero Section */}
       <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        {/* Animated Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-portfolio-blue/10 to-portfolio-teal/10"></div>
+        
+        {/* Floating geometric shapes */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-portfolio-blue/20 rounded-full animate-float"></div>
+        <div className="absolute top-40 right-20 w-16 h-16 bg-portfolio-teal/20 rounded-lg rotate-45 animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-40 left-20 w-12 h-12 bg-portfolio-purple/20 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+        
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 opacity-5" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+          backgroundSize: '50px 50px'
+        }}></div>
+
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="animate-fade-in">
-            <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-portfolio-blue to-portfolio-teal p-1">
-              <div className="w-full h-full rounded-full bg-portfolio-gray flex items-center justify-center">
-                <span className="text-4xl font-bold">AJ</span>
+            {/* Enhanced Profile Section */}
+            <div className="relative mb-8 inline-block">
+              <div className="w-36 h-36 mx-auto rounded-full bg-gradient-to-br from-portfolio-blue via-portfolio-teal to-portfolio-purple p-1 animate-glow">
+                <div className="w-full h-full rounded-full bg-portfolio-gray flex items-center justify-center relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-portfolio-blue/20 to-portfolio-teal/20"></div>
+                  <span className="text-4xl font-bold relative z-10">AJ</span>
+                </div>
+              </div>
+              {/* Status indicator */}
+              <div className="absolute -bottom-2 -right-2 bg-green-500 w-8 h-8 rounded-full border-4 border-portfolio-dark flex items-center justify-center">
+                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
               </div>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="text-gradient">Aashish Kumar Jha</span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-300">
-              Aspiring Software Engineer | DevOps Enthusiast | Problem Solver
-            </p>
-            <p className="text-lg mb-8 max-w-3xl mx-auto text-gray-400">
-              Aspiring Computer Science professional with a solid academic background and hands-on experience in software development, eager to apply technical skills and knowledge to real-world challenges.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+            {/* Enhanced Typography */}
+            <div className="space-y-6 mb-8">
+              <div className="flex items-center justify-center gap-2 text-sm text-portfolio-teal mb-2">
+                <Sparkles size={16} />
+                <span className="tracking-wider uppercase">Available for Opportunities</span>
+                <Sparkles size={16} />
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                <span className="text-gradient bg-gradient-to-r from-white via-portfolio-blue to-portfolio-teal bg-clip-text text-transparent">
+                  Aashish Kumar Jha
+                </span>
+              </h1>
+              
+              <div className="flex flex-wrap justify-center gap-4 mb-6">
+                <div className="flex items-center gap-2 bg-portfolio-gray/50 backdrop-blur-sm px-4 py-2 rounded-full border border-portfolio-blue/20">
+                  <Code size={16} className="text-portfolio-blue" />
+                  <span className="text-sm">Software Engineer</span>
+                </div>
+                <div className="flex items-center gap-2 bg-portfolio-gray/50 backdrop-blur-sm px-4 py-2 rounded-full border border-portfolio-teal/20">
+                  <Rocket size={16} className="text-portfolio-teal" />
+                  <span className="text-sm">DevOps Enthusiast</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Enhanced Description */}
+            <div className="max-w-4xl mx-auto mb-12">
+              <p className="text-xl md:text-2xl mb-6 text-gray-300 font-light leading-relaxed">
+                Crafting innovative solutions through code and automation
+              </p>
+              <p className="text-lg mb-8 text-gray-400 leading-relaxed">
+                Aspiring Computer Science professional with a solid academic background and hands-on experience in software development, eager to apply technical skills and knowledge to real-world challenges.
+              </p>
+            </div>
+
+            {/* Enhanced CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
               <Button
                 onClick={() => scrollToSection("projects")}
-                className="bg-gradient-to-r from-portfolio-blue to-portfolio-teal hover:shadow-lg hover:shadow-portfolio-blue/25 transition-all"
+                size="lg"
+                className="bg-gradient-to-r from-portfolio-blue to-portfolio-teal hover:shadow-xl hover:shadow-portfolio-blue/25 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-6 rounded-xl"
               >
+                <ExternalLink className="mr-2" size={20} />
                 View Portfolio
               </Button>
               <Button
                 variant="outline"
+                size="lg"
                 onClick={() => scrollToSection("contact")}
-                className="border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white"
+                className="border-2 border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white transition-all duration-300 text-lg px-8 py-6 rounded-xl backdrop-blur-sm"
               >
+                <Mail className="mr-2" size={20} />
                 Contact Me
               </Button>
             </div>
+
+            {/* Quick Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+              <div className="text-center p-4 bg-portfolio-gray/30 backdrop-blur-sm rounded-xl border border-portfolio-blue/10">
+                <div className="text-2xl font-bold text-portfolio-blue">2025</div>
+                <div className="text-sm text-gray-400">Graduate</div>
+              </div>
+              <div className="text-center p-4 bg-portfolio-gray/30 backdrop-blur-sm rounded-xl border border-portfolio-teal/10">
+                <div className="text-2xl font-bold text-portfolio-teal">10+</div>
+                <div className="text-sm text-gray-400">Technologies</div>
+              </div>
+              <div className="text-center p-4 bg-portfolio-gray/30 backdrop-blur-sm rounded-xl border border-portfolio-purple/10">
+                <div className="text-2xl font-bold text-portfolio-purple">4+</div>
+                <div className="text-sm text-gray-400">Projects</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <ChevronDown size={32} className="text-portfolio-blue" />
+
+        {/* Enhanced Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+          <div className="text-xs text-gray-400 mb-2 tracking-wider">SCROLL DOWN</div>
+          <div className="w-6 h-10 border-2 border-portfolio-blue rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-portfolio-blue rounded-full mt-2 animate-pulse"></div>
+          </div>
         </div>
       </section>
 
