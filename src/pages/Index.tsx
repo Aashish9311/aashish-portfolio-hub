@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,6 +12,7 @@ const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   // Handle smooth scrolling to sections
   const scrollToSection = (sectionId: string) => {
@@ -68,8 +69,10 @@ const Index = () => {
         description: "Thank you for your message. I'll get back to you soon.",
       });
 
-      // Reset form
-      e.currentTarget.reset();
+      // Reset form using ref
+      if (formRef.current) {
+        formRef.current.reset();
+      }
     } catch (error) {
       console.error('EmailJS Error:', error);
       toast({
@@ -456,7 +459,7 @@ const Index = () => {
               </Button>
             </div>
             <div>
-              <form onSubmit={handleContactSubmit} className="space-y-4">
+              <form ref={formRef} onSubmit={handleContactSubmit} className="space-y-4">
                 <Input
                   name="name"
                   placeholder="Your Name"
