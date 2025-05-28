@@ -6,10 +6,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Github, Linkedin, Mail, Phone, Download, ExternalLink, ChevronDown, Menu, X, Sparkles, Code, Rocket, MapPin, Calendar } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import emailjs from '@emailjs/browser';
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Handle smooth scrolling to sections
   const scrollToSection = (sectionId: string) => {
@@ -41,12 +43,43 @@ const Index = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast({
-      title: "Message sent!",
-      description: "Thank you for your message. I'll get back to you soon.",
-    });
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    const templateParams = {
+      from_name: formData.get('name'),
+      from_email: formData.get('email'),
+      message: formData.get('message'),
+      to_name: 'Aashish Kumar Jha',
+    };
+
+    try {
+      await emailjs.send(
+        'service_1b4yz0r', // service ID
+        'template_tr4rjj9', // template ID
+        templateParams,
+        'v8GKUFJN2iew3FPpp' // public key
+      );
+
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for your message. I'll get back to you soon.",
+      });
+
+      // Reset form
+      e.currentTarget.reset();
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      toast({
+        title: "Failed to send message",
+        description: "Please try again or contact me directly via email.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const skills = [
@@ -425,24 +458,31 @@ const Index = () => {
             <div>
               <form onSubmit={handleContactSubmit} className="space-y-4">
                 <Input
+                  name="name"
                   placeholder="Your Name"
+                  required
                   className="bg-portfolio-dark border-portfolio-blue/30 focus:border-portfolio-blue"
                 />
                 <Input
+                  name="email"
                   type="email"
                   placeholder="Your Email"
+                  required
                   className="bg-portfolio-dark border-portfolio-blue/30 focus:border-portfolio-blue"
                 />
                 <Textarea
+                  name="message"
                   placeholder="Your Message"
                   rows={5}
+                  required
                   className="bg-portfolio-dark border-portfolio-blue/30 focus:border-portfolio-blue"
                 />
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-portfolio-blue to-portfolio-teal hover:shadow-lg hover:shadow-portfolio-blue/25 transition-all"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-portfolio-blue to-portfolio-teal hover:shadow-lg hover:shadow-portfolio-blue/25 transition-all disabled:opacity-50"
                 >
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </div>
