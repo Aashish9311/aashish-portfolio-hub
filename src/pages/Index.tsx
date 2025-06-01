@@ -168,8 +168,8 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* Enhanced Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Enhanced Hero Section - Adjusted positioning */}
+      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
         {/* Background Elements */}
         <div className="absolute inset-0">
           {/* Gradient overlay */}
@@ -190,9 +190,9 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
             {/* Main Content */}
-            <div className="text-center space-y-8 animate-fade-in">
+            <div className="text-center space-y-6 animate-fade-in">
               {/* Profile Image - Made Larger */}
-              <div className="relative inline-block mb-8">
+              <div className="relative inline-block mb-6">
                 <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-br from-portfolio-blue via-portfolio-teal to-portfolio-purple p-1.5 animate-pulse">
                   <div className="w-full h-full rounded-full overflow-hidden bg-portfolio-gray">
                     <img 
@@ -214,20 +214,20 @@ const Index = () => {
               </div>
 
               {/* Greeting & Name */}
-              <div className="space-y-6 mb-8">
+              <div className="space-y-4 mb-6">
                 <div className="flex items-center justify-center gap-2 text-sm text-portfolio-teal mb-2">
                   <Sparkles size={16} />
                   <span className="tracking-wider uppercase">Available for Opportunities</span>
                   <Sparkles size={16} />
                 </div>
                 
-                <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
                   <span className="text-gradient bg-gradient-to-r from-white via-portfolio-blue to-portfolio-teal bg-clip-text text-transparent">
                     Aashish Kumar Jha
                   </span>
                 </h1>
                 
-                <div className="flex flex-wrap justify-center gap-4 mb-6">
+                <div className="flex flex-wrap justify-center gap-4 mb-4">
                   <div className="flex items-center gap-2 bg-portfolio-gray/50 backdrop-blur-sm px-4 py-2 rounded-full border border-portfolio-blue/20">
                     <Code size={16} className="text-portfolio-blue" />
                     <span className="text-sm">Software Engineer</span>
@@ -240,17 +240,17 @@ const Index = () => {
               </div>
 
               {/* Enhanced Description */}
-              <div className="max-w-4xl mx-auto mb-12">
-                <p className="text-xl md:text-2xl mb-6 text-gray-300 font-light leading-relaxed">
+              <div className="max-w-4xl mx-auto mb-8">
+                <p className="text-xl md:text-2xl mb-4 text-gray-300 font-light leading-relaxed">
                   Crafting innovative solutions through code and automation
                 </p>
-                <p className="text-lg mb-8 text-gray-400 leading-relaxed">
+                <p className="text-lg mb-6 text-gray-400 leading-relaxed">
                   Aspiring Computer Science professional with a solid academic background and hands-on experience in software development, eager to apply technical skills and knowledge to real-world challenges.
                 </p>
               </div>
 
               {/* Enhanced CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
                 <Button
                   onClick={() => scrollToSection("projects")}
                   size="lg"
