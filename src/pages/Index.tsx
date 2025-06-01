@@ -1,4 +1,5 @@
 
+
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -195,7 +196,7 @@ const Index = () => {
                 <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-br from-portfolio-blue via-portfolio-teal to-portfolio-purple p-1.5 animate-pulse">
                   <div className="w-full h-full rounded-full overflow-hidden bg-portfolio-gray">
                     <img 
-                      src="/lovable-uploads/1831a2ab-f66c-4476-856e-4eff578ae196.png"
+                      src="https://i.ibb.co/ymPJ47wh/Portfolio-img.jpg"
                       alt="Aashish Kumar Jha"
                       className="w-full h-full object-cover object-center"
                       onError={(e) => {
@@ -507,3 +508,4 @@ const Index = () => {
 };
 
 export default Index;
+
