@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -189,25 +190,25 @@ const Index = () => {
           <div className="max-w-4xl mx-auto">
             {/* Main Content */}
             <div className="text-center space-y-8 animate-fade-in">
-              {/* Profile Image */}
+              {/* Profile Image - Made Larger */}
               <div className="relative inline-block mb-8">
-                <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-portfolio-blue via-portfolio-teal to-portfolio-purple p-1 animate-pulse">
+                <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-br from-portfolio-blue via-portfolio-teal to-portfolio-purple p-1.5 animate-pulse">
                   <div className="w-full h-full rounded-full overflow-hidden bg-portfolio-gray">
                     <img 
-                      src="https://postimage.me/image/Portfolio-img.UFzyZL"
+                      src="/lovable-uploads/1831a2ab-f66c-4476-856e-4eff578ae196.png"
                       alt="Aashish Kumar Jha"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-center"
                       onError={(e) => {
                         // Fallback if image fails to load
                         e.currentTarget.style.display = 'none';
-                        e.currentTarget.parentElement!.innerHTML = '<div class="w-full h-full bg-portfolio-gray/50 backdrop-blur-sm flex items-center justify-center"><span class="text-3xl font-bold text-white">AJ</span></div>';
+                        e.currentTarget.parentElement!.innerHTML = '<div class="w-full h-full bg-portfolio-gray/50 backdrop-blur-sm flex items-center justify-center"><span class="text-4xl font-bold text-white">AJ</span></div>';
                       }}
                     />
                   </div>
                 </div>
                 {/* Online status */}
-                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-portfolio-dark flex items-center justify-center">
-                  <div className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></div>
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-3 border-portfolio-dark flex items-center justify-center">
+                  <div className="w-3.5 h-3.5 bg-green-400 rounded-full animate-pulse"></div>
                 </div>
               </div>
 
