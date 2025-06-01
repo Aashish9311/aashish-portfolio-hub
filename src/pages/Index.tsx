@@ -87,17 +87,12 @@ const Index = () => {
   };
 
   const handleResumeDownload = () => {
-    // Create a temporary link element to trigger download
-    const link = document.createElement('a');
-    link.href = '/resume.pdf'; // Assuming resume is in the public folder
-    link.download = 'Aashish_Kumar_Jha_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Open the Google Drive link in a new tab
+    window.open('https://drive.google.com/file/d/16TA-UUtEVE3OBQKfJNy4K6onh-q2u7Et/view?usp=sharing', '_blank');
     
     toast({
-      title: "Resume Download",
-      description: "Resume download started. If it doesn't work, please contact me directly.",
+      title: "Resume Opening",
+      description: "Resume is opening in a new tab. You can download it from Google Drive.",
     });
   };
 
@@ -136,7 +131,8 @@ const Index = () => {
     {
       title: "First Rank in Progyan 7.0",
       description: "Awarded first rank in the in-house exhibition conducted by BIET CSE for the final year project: Metamask Integrated Decentralized Cloud Storage.",
-      icon: Award
+      icon: Award,
+      link: "https://drive.google.com/file/d/1eDy79WfeoMQEK1BSY4indwFKjJh9guG9/view?usp=sharing"
     },
     {
       title: "Published Paper",
@@ -148,12 +144,16 @@ const Index = () => {
 
   const certifications = [
     {
+      title: "AWS Cloud Practitioner Essentials (AWS Training and Certification – Course Completion)",
+      link: "https://drive.google.com/file/d/1_YASkBPZ3qeSg7W0-b6IVIESdSd7zW-4/view?usp=sharing"
+    },
+    {
       title: "Participated In Establishing a CI/CD Pipeline for Automated Deployments (IBM CEP)",
       link: "https://qr.me-qr.com/mobile/pdf/425d2c92-13be-4d5f-b8ad-fb4cbf66b5a7"
     },
     {
       title: "Software Engineer Intern (HackerRank)",
-      link: "https://www.hackerrank.com/certificates/49e6f015ce5d"
+      link: "https://www.hackerrank.com/certificates/9c36b4ce4f9e"
     },
     {
       title: "Python (HackerRank)",
@@ -164,9 +164,9 @@ const Index = () => {
       link: "https://www.hackerrank.com/certificates/e71388ddb248"
     },
     {
-      title: "Technology Job Simulation",
+      title: "Deloitte Technology Job Simulation",
       description: "Certificate of Completion – Aashish Kumar Jha, May 28th, 2025. Completed practical tasks in Coding and Development (March – May 2025)",
-      link: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/9PBTqmSxAf6zZTseP/udmxiyHeqYQLkTPvf_9PBTqmSxAf6zZTseP_XgXbpytRLdG5QBJKf_1748432564265_completion_certificate.pdf"
+      link: "https://drive.google.com/file/d/1MbClo2aMLAE17f3lFYV7VPSh1ZP0k_yj/view?usp=sharing"
     }
   ];
 
@@ -220,7 +220,7 @@ const Index = () => {
       </nav>
 
       {/* Enhanced Hero Section - Adjusted positioning */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24">
         {/* Background Elements */}
         <div className="absolute inset-0">
           {/* Gradient overlay */}
@@ -242,8 +242,8 @@ const Index = () => {
           <div className="max-w-4xl mx-auto">
             {/* Main Content */}
             <div className="text-center space-y-6 animate-fade-in">
-              {/* Profile Image - Made Larger */}
-              <div className="relative inline-block mb-6">
+              {/* Profile Image - Made Larger and adjusted positioning */}
+              <div className="relative inline-block mb-8 mt-4">
                 <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-br from-portfolio-blue via-portfolio-teal to-portfolio-purple p-1.5 animate-pulse">
                   <div className="w-full h-full rounded-full overflow-hidden bg-portfolio-gray">
                     <img 
@@ -288,7 +288,11 @@ const Index = () => {
                     <span className="text-sm">DevOps Engineer</span>
                   </div>
                   <div className="flex items-center gap-2 bg-portfolio-gray/50 backdrop-blur-sm px-4 py-2 rounded-full border border-portfolio-purple/20">
-                    <Award size={16} className="text-portfolio-purple" />
+                    <img 
+                      src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" 
+                      alt="AWS Logo" 
+                      className="w-4 h-4 object-contain"
+                    />
                     <span className="text-sm">AWS Cloud Practitioner</span>
                   </div>
                 </div>
@@ -392,7 +396,17 @@ const Index = () => {
                 <div className="flex flex-col md:flex-row justify-between items-start mb-4">
                   <div>
                     <h3 className="text-xl font-semibold text-portfolio-blue">AI DevOps Engineer</h3>
-                    <p className="text-lg text-portfolio-teal">Rooman Technologies Pvt. Ltd.</p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-lg text-portfolio-teal">Rooman Technologies Pvt. Ltd.</p>
+                      <a
+                        href="https://drive.google.com/file/d/1IMujGV26HUwzSa2QJIBaSuyU2DmZOv7b/view?usp=sharing"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-portfolio-blue hover:text-portfolio-teal transition-colors"
+                      >
+                        <ExternalLink size={16} />
+                      </a>
+                    </div>
                   </div>
                   <p className="text-gray-400">09/2024 – 02/2025</p>
                 </div>
@@ -521,7 +535,8 @@ const Index = () => {
                           rel="noopener noreferrer"
                           className="inline-flex items-center text-portfolio-teal hover:text-portfolio-blue transition-colors"
                         >
-                          View Paper <ExternalLink size={16} className="ml-1" />
+                          {achievement.title.includes("Paper") ? "View Paper" : "View Certificate"} 
+                          <ExternalLink size={16} className="ml-1" />
                         </a>
                       )}
                     </div>
