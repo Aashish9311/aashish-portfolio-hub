@@ -1,12 +1,11 @@
 
-
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Github, Linkedin, Mail, Phone, Download, ExternalLink, ChevronDown, Menu, X, Sparkles, Code, Rocket, MapPin, Calendar } from "lucide-react";
+import { Github, Linkedin, Mail, Phone, Download, ExternalLink, ChevronDown, Menu, X, Sparkles, Code, Rocket, MapPin, Calendar, Award, FileText } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import emailjs from '@emailjs/browser';
 
@@ -28,7 +27,7 @@ const Index = () => {
   // Handle active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "about", "experience", "skills", "projects", "contact"];
+      const sections = ["home", "about", "experience", "skills", "projects", "achievements", "certifications", "contact"];
       const currentSection = sections.find((section) => {
         const element = document.getElementById(section);
         if (element) {
@@ -87,9 +86,23 @@ const Index = () => {
     }
   };
 
-  const skills = [
-    "Python", "SQL", "Git", "Docker", "Linux", "AWS", "Django", "Flask",
-    "HTML/CSS", "JavaScript", "Solidity", "Jenkins", "CI/CD", "DevOps"
+  const handleResumeDownload = () => {
+    // Create a temporary link element to trigger download
+    const link = document.createElement('a');
+    link.href = '/resume.pdf'; // Assuming resume is in the public folder
+    link.download = 'Aashish_Kumar_Jha_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast({
+      title: "Resume Download",
+      description: "Resume download started. If it doesn't work, please contact me directly.",
+    });
+  };
+
+  const technicalSkills = [
+    "Python", "SQL", "Git & GitHub", "Docker (basic)", "AWS Cloud (basic)", "Linux (basic)", "Jenkins (basic)"
   ];
 
   const projects = [
@@ -97,25 +110,63 @@ const Index = () => {
       title: "Metamask Integrated Decentralized Cloud Storage",
       description: "Developed a decentralized storage system enhancing data integrity and privacy using blockchain technology.",
       technologies: ["IPFS", "Ethereum", "Smart Contract", "Solidity", "Metamask", "HTML/CSS/JS"],
-      link: "#"
+      link: "https://zingy-kelpie-b3afbd.netlify.app/"
     },
     {
       title: "CI/CD Pipeline for Automated Deployment",
       description: "Built a full CI/CD pipeline for automated deployment of a Django application with containerization.",
       technologies: ["Django", "Python", "Git", "Docker", "Jenkins", "EC2"],
-      link: "#"
+      link: "https://github.com/Aashish9311/CI-CD-Pipeline-For-Automated-Deployment"
     },
     {
       title: "Virtual Mouse Using Hand Gestures",
       description: "Contactless interaction with computers through gesture detection using computer vision.",
       technologies: ["Python", "OpenCV", "MediaPipe", "PyAutoGUI"],
-      link: "#"
+      link: "https://github.com/Aashish9311/Virtual_mouse"
     },
     {
       title: "Pharmacy Seller & Supplier System",
       description: "Streamlined communication and transactions between pharmacies and suppliers with a web application.",
       technologies: ["HTML", "CSS", "JS", "Bootstrap", "Flask", "SQLAlchemy"],
       link: "#"
+    }
+  ];
+
+  const achievements = [
+    {
+      title: "First Rank in Progyan 7.0",
+      description: "Awarded first rank in the in-house exhibition conducted by BIET CSE for the final year project: Metamask Integrated Decentralized Cloud Storage.",
+      icon: Award
+    },
+    {
+      title: "Published Paper",
+      description: "Published a research paper on Metamask Integrated Decentralized Cloud Storage.",
+      link: "https://philarchive.org/archive/AASRSS",
+      icon: FileText
+    }
+  ];
+
+  const certifications = [
+    {
+      title: "Participated In Establishing a CI/CD Pipeline for Automated Deployments (IBM CEP)",
+      link: "https://qr.me-qr.com/mobile/pdf/425d2c92-13be-4d5f-b8ad-fb4cbf66b5a7"
+    },
+    {
+      title: "Software Engineer Intern (HackerRank)",
+      link: "https://www.hackerrank.com/certificates/49e6f015ce5d"
+    },
+    {
+      title: "Python (HackerRank)",
+      link: "https://www.hackerrank.com/certificates/d7140b19c439"
+    },
+    {
+      title: "Problem Solving (HackerRank)",
+      link: "https://www.hackerrank.com/certificates/e71388ddb248"
+    },
+    {
+      title: "Technology Job Simulation",
+      description: "Certificate of Completion – Aashish Kumar Jha, May 28th, 2025. Completed practical tasks in Coding and Development (March – May 2025)",
+      link: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/9PBTqmSxAf6zZTseP/udmxiyHeqYQLkTPvf_9PBTqmSxAf6zZTseP_XgXbpytRLdG5QBJKf_1748432564265_completion_certificate.pdf"
     }
   ];
 
@@ -129,7 +180,7 @@ const Index = () => {
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
-              {["Home", "About", "Experience", "Skills", "Projects", "Contact"].map((item) => (
+              {["Home", "About", "Experience", "Skills", "Projects", "Achievements", "Certifications", "Contact"].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -154,7 +205,7 @@ const Index = () => {
           {/* Mobile Navigation */}
           {isMenuOpen && (
             <div className="md:hidden mt-4 pb-4 border-t border-portfolio-gray pt-4">
-              {["Home", "About", "Experience", "Skills", "Projects", "Contact"].map((item) => (
+              {["Home", "About", "Experience", "Skills", "Projects", "Achievements", "Certifications", "Contact"].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -230,11 +281,15 @@ const Index = () => {
                 <div className="flex flex-wrap justify-center gap-4 mb-4">
                   <div className="flex items-center gap-2 bg-portfolio-gray/50 backdrop-blur-sm px-4 py-2 rounded-full border border-portfolio-blue/20">
                     <Code size={16} className="text-portfolio-blue" />
-                    <span className="text-sm">Software Engineer</span>
+                    <span className="text-sm">Software Developer</span>
                   </div>
                   <div className="flex items-center gap-2 bg-portfolio-gray/50 backdrop-blur-sm px-4 py-2 rounded-full border border-portfolio-teal/20">
                     <Rocket size={16} className="text-portfolio-teal" />
-                    <span className="text-sm">DevOps Enthusiast</span>
+                    <span className="text-sm">DevOps Engineer</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-portfolio-gray/50 backdrop-blur-sm px-4 py-2 rounded-full border border-portfolio-purple/20">
+                    <Award size={16} className="text-portfolio-purple" />
+                    <span className="text-sm">AWS Cloud Practitioner</span>
                   </div>
                 </div>
               </div>
@@ -257,7 +312,7 @@ const Index = () => {
                   className="bg-gradient-to-r from-portfolio-blue to-portfolio-teal hover:shadow-xl hover:shadow-portfolio-blue/25 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-6 rounded-xl"
                 >
                   <ExternalLink className="mr-2" size={20} />
-                  View Portfolio
+                  View Projects
                 </Button>
                 <Button
                   variant="outline"
@@ -277,7 +332,7 @@ const Index = () => {
                   <div className="text-sm text-gray-400">Graduate</div>
                 </div>
                 <div className="text-center p-4 bg-portfolio-gray/30 backdrop-blur-sm rounded-xl border border-portfolio-teal/10">
-                  <div className="text-2xl font-bold text-portfolio-teal">10+</div>
+                  <div className="text-2xl font-bold text-portfolio-teal">7+</div>
                   <div className="text-sm text-gray-400">Technologies</div>
                 </div>
                 <div className="text-center p-4 bg-portfolio-gray/30 backdrop-blur-sm rounded-xl border border-portfolio-purple/10">
@@ -337,7 +392,7 @@ const Index = () => {
                 <div className="flex flex-col md:flex-row justify-between items-start mb-4">
                   <div>
                     <h3 className="text-xl font-semibold text-portfolio-blue">AI DevOps Engineer</h3>
-                    <p className="text-lg">Rooman Technologies Pvt. Ltd.</p>
+                    <p className="text-lg text-portfolio-teal">Rooman Technologies Pvt. Ltd.</p>
                   </div>
                   <p className="text-gray-400">09/2024 – 02/2025</p>
                 </div>
@@ -361,7 +416,7 @@ const Index = () => {
               <div>
                 <h3 className="text-xl font-semibold text-portfolio-blue mb-6">Technical Skills</h3>
                 <div className="flex flex-wrap gap-3">
-                  {skills.map((skill) => (
+                  {technicalSkills.map((skill) => (
                     <Badge
                       key={skill}
                       variant="outline"
@@ -383,6 +438,12 @@ const Index = () => {
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Team Work</span>
+                    <div className="w-48 bg-portfolio-dark rounded-full h-2">
+                      <div className="bg-gradient-to-r from-portfolio-blue to-portfolio-teal h-2 rounded-full w-4/5"></div>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Communication</span>
                     <div className="w-48 bg-portfolio-dark rounded-full h-2">
                       <div className="bg-gradient-to-r from-portfolio-blue to-portfolio-teal h-2 rounded-full w-4/5"></div>
                     </div>
@@ -409,7 +470,14 @@ const Index = () => {
                     <h3 className="text-xl font-semibold text-portfolio-blue group-hover:text-portfolio-teal transition-colors">
                       {project.title}
                     </h3>
-                    <ExternalLink size={20} className="text-gray-400 hover:text-portfolio-blue transition-colors cursor-pointer" />
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-portfolio-blue transition-colors"
+                    >
+                      <ExternalLink size={20} />
+                    </a>
                   </div>
                   <p className="text-gray-300 mb-4">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
@@ -418,6 +486,81 @@ const Index = () => {
                         {tech}
                       </Badge>
                     ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Achievements Section */}
+      <section id="achievements" className="py-20 bg-portfolio-gray">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12 text-gradient">Achievements</h2>
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+            {achievements.map((achievement, index) => (
+              <Card
+                key={index}
+                className="bg-portfolio-dark border-portfolio-blue/20 hover:border-portfolio-blue/50 transition-all hover:shadow-lg hover:shadow-portfolio-blue/10"
+              >
+                <CardContent className="p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">
+                      <achievement.icon className="w-8 h-8 text-portfolio-blue" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-semibold text-portfolio-blue mb-2">
+                        {achievement.title}
+                      </h3>
+                      <p className="text-gray-300 mb-4">{achievement.description}</p>
+                      {achievement.link && (
+                        <a
+                          href={achievement.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-portfolio-teal hover:text-portfolio-blue transition-colors"
+                        >
+                          View Paper <ExternalLink size={16} className="ml-1" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications Section */}
+      <section id="certifications" className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12 text-gradient">Certifications</h2>
+          <div className="max-w-4xl mx-auto grid gap-6">
+            {certifications.map((cert, index) => (
+              <Card
+                key={index}
+                className="bg-portfolio-gray border-portfolio-blue/20 hover:border-portfolio-blue/50 transition-all hover:shadow-lg hover:shadow-portfolio-blue/10"
+              >
+                <CardContent className="p-6">
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-portfolio-blue mb-2">
+                        {cert.title}
+                      </h3>
+                      {cert.description && (
+                        <p className="text-gray-300 mb-4">{cert.description}</p>
+                      )}
+                    </div>
+                    <a
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ml-4 text-portfolio-teal hover:text-portfolio-blue transition-colors"
+                    >
+                      <ExternalLink size={20} />
+                    </a>
                   </div>
                 </CardContent>
               </Card>
@@ -455,7 +598,10 @@ const Index = () => {
                   </a>
                 </div>
               </div>
-              <Button className="mt-6 bg-gradient-to-r from-portfolio-blue to-portfolio-teal hover:shadow-lg hover:shadow-portfolio-blue/25 transition-all">
+              <Button 
+                onClick={handleResumeDownload}
+                className="mt-6 bg-gradient-to-r from-portfolio-blue to-portfolio-teal hover:shadow-lg hover:shadow-portfolio-blue/25 transition-all"
+              >
                 <Download size={16} className="mr-2" />
                 Download Resume
               </Button>
@@ -508,4 +654,3 @@ const Index = () => {
 };
 
 export default Index;
-
